@@ -1,9 +1,18 @@
-"""Simple DSL for rule-based organelle behavior."""
+"""Simple DSL for rule-based organelle behavior.
+
+Errors raised while evaluating rule conditions are logged with the
+failing condition string and the exception message, then evaluation
+continues with the next rule.
+"""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Callable, Dict, List
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -32,5 +41,8 @@ class RuleEngine:
             try:
                 if eval(rule.condition, {}, self.state):
                     rule.action(self.state)
-            except Exception:
+            except Exception as exc:
+                logger.warning(
+                    "Error evaluating rule '%s': %s", rule.condition, exc
+                )
                 continue
