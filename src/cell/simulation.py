@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import pygame
-from src.logger_config import logger
+from logger_config import logger
 
 from .organelles import (
     Cell,
