@@ -61,3 +61,18 @@ engine.update_state(health=40)
 engine.evaluate()
 print(engine.state["health"])  # 41.0
 ```
+
+### Organelles Example
+
+For a slightly more involved demonstration, ``add_organelle_rules`` models a
+simple flow from mitochondria to the Golgi apparatus:
+
+```python
+from dsl import RuleEngine, add_organelle_rules
+
+engine = RuleEngine()
+engine.update_state(atp=10, nucleus_active=True)
+add_organelle_rules(engine)
+engine.evaluate()
+print(engine.state["proteins_packaged"])  # 1.0
+```

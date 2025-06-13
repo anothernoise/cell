@@ -35,3 +35,14 @@ def test_basic_rule_increases_health():
     engine.evaluate()
 
     assert engine.state["health"] == 41.0
+
+
+def test_organelle_rule_chain():
+    engine = RuleEngine()
+    from dsl.organelle_rules import add_organelle_rules
+
+    engine.update_state(atp=10, nucleus_active=True)
+    add_organelle_rules(engine)
+    engine.evaluate()
+
+    assert engine.state["proteins_packaged"] == 1.0
