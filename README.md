@@ -27,3 +27,21 @@ src/
   ui/            # UI helpers
   main.py        # Entry point
 ```
+
+## Logging
+
+The rule engine in `dsl.rules` relies on Python's standard `logging` module.
+If evaluating a rule condition raises an exception, the error is caught and a
+warning is emitted with the failing condition text. The logger is obtained with
+`logging.getLogger(__name__)` so it inherits the configuration of your
+application.
+
+You can enable basic logging output at program start-up, for example in
+`src/main.py`:
+
+```python
+import logging
+
+logging.basicConfig(level=logging.INFO,
+                    format="%(levelname)s:%(name)s:%(message)s")
+```
