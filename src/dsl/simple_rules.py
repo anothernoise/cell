@@ -14,3 +14,4 @@ def add_basic_rules(engine: RuleEngine) -> None:
         state["health"] = state.get("health", 0.0) + 1.0
 
     engine.add_rule("maintenance", "health < 50", restore_health)
+

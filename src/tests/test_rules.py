@@ -47,3 +47,6 @@ def test_organelle_rule_chain():
     engine.fire("protein_synthesis")
 
     assert engine.state["proteins_packaged"] == 1.0
+    engine.evaluate()
+
+    assert engine.state["health"] == 41.0
