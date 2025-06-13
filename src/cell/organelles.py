@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pygame
 import random
-from src.logger_config import logger
+from logger_config import logger
 
 
 class Organelle:
