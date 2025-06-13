@@ -46,18 +46,21 @@ logging.basicConfig(level=logging.INFO,
                     format="%(levelname)s:%(name)s:%(message)s")
 ```
 
-## Example DSL Rule
+### Organelles Example
 
-The DSL allows you to register simple condition-action pairs evaluated on a
-dictionary-like state. The helper ``add_basic_rules`` defines an example rule
-that increases ``health`` when it drops below ``50``:
+For a slightly more involved demonstration, ``add_organelle_rules`` models a
+simple flow from mitochondria to the Golgi apparatus:
 
 ```python
-from dsl import RuleEngine, add_basic_rules
+from dsl import RuleEngine, add_organelle_rules
 
 engine = RuleEngine()
-add_basic_rules(engine)
-engine.update_state(health=40)
+engine.update_state(atp=10, nucleus_active=True)
+add_organelle_rules(engine)
+engine.fire("metabolism")
+engine.fire("protein_synthesis")
+print(engine.state["proteins_packaged"])  # 1.0
+
 engine.evaluate()
 print(engine.state["health"])  # 41.0
-```
+
