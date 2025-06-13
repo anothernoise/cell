@@ -24,3 +24,14 @@ def test_rule_condition_exception_logs_warning(caplog):
     assert record.levelname == "WARNING"
     assert "1 / 0" in record.getMessage()
     assert "division by zero" in record.getMessage()
+
+
+def test_basic_rule_increases_health():
+    engine = RuleEngine()
+    from dsl.simple_rules import add_basic_rules
+
+    engine.update_state(health=40)
+    add_basic_rules(engine)
+    engine.evaluate()
+
+    assert engine.state["health"] == 41.0
