@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import pygame
 import random
+from src.logger_config import logger
 
 
 class Organelle:
@@ -103,9 +104,11 @@ class Cell:
         self.atp = 50.0
         self.health = 100.0
         self.proteins = 0.0
+        logger.info(f"Cell initialized with ATP: {self.atp}")
 
     def add_organelle(self, organelle: Organelle) -> None:
         self.organelles.append(organelle)
+        logger.debug(f"Added organelle: {organelle.name} at position {organelle.pos}")
 
     def step(self, dt: float) -> None:
         for organelle in self.organelles:
@@ -113,5 +116,7 @@ class Cell:
         self.atp = max(0.0, min(self.atp, 100.0))
 
     def draw(self, surface: pygame.Surface) -> None:
+        logger.debug(f"Drawing {len(self.organelles)} organelles")
         for organelle in self.organelles:
+            logger.debug(f"Drawing {organelle.name} at {organelle.pos}")
             organelle.draw(surface)

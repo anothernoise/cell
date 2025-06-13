@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pygame
+from src.logger_config import logger
 
 from .organelles import (
     Cell,
@@ -49,10 +50,13 @@ class Simulation:
         self.cell.step(dt)
 
     def draw(self) -> None:
-        self.screen.fill((0, 0, 0))
+        logger.debug("Drawing simulation frame")
+        self.screen.fill((0, 0, 0))  # Black background
+        logger.debug(f"Screen dimensions: {self.screen.get_size()}")
         self.cell.draw(self.screen)
         self._draw_ui()
         pygame.display.flip()
+        logger.debug("Frame drawn and displayed")
 
     def _draw_ui(self) -> None:
         font = pygame.font.SysFont(None, 24)

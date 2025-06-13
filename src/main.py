@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 import os
 from config import DISABLE_SOUND
 
