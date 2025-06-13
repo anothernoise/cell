@@ -3,6 +3,12 @@
 from __future__ import annotations
 
 from cell.simulation import Simulation
+import logging
+
+# Example logging configuration. The rule engine in ``dsl.rules`` uses a logger
+# named after its module, so configuring logging here controls its output.
+logging.basicConfig(level=logging.INFO,
+                    format="%(levelname)s:%(name)s:%(message)s")
 
 
 if __name__ == "__main__":
